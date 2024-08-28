@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [color, setColor] = useState("olive");
+  const [color, setColor] = useState(() => {
+    return localStorage.getItem("backgroundColor") || "olive";
+  });
+  useEffect(() => {
+    localStorage.setItem("backgroundColor", color);
+  }, [color]);
   return (
     <>
       <div
