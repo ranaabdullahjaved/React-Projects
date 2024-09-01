@@ -6,7 +6,7 @@ function App() {
   const [length, setLength] = useState(8);
   const [number, numberAllowed] = useState(false);
   const [characters, charAllowed] = useState(false);
-
+  const passwordRef = useRef(null);
   // Function for Password Generation
   const generatedPass = useCallback(() => {
     let pass = "";
@@ -21,11 +21,11 @@ function App() {
     setPassword(pass);
   }, [length, number, characters]);
 
-  const copyPasswordToClipbord = () => {
-    passwordRef.current.select();
+  const copyPasswordToClipboard = () => {
+    passwordRef.current?.select();
     window.navigator.clipboard.writeText(password);
   };
-  const passwordRef = useRef(null);
+
   useEffect(() => {
     generatedPass();
   }, [length, characters, number]);
@@ -45,7 +45,7 @@ function App() {
             readOnly
           />
           <button
-            onClick={copyPasswordToClipbord}
+            onClick={copyPasswordToClipboard}
             className="outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0 rounded-r-lg"
           >
             Copy
@@ -62,7 +62,6 @@ function App() {
               onChange={(e) => {
                 setLength(e.target.value);
               }}
-              ref={passwordRef}
             />
             <label htmlFor="">Length:{length}</label>
           </div>
