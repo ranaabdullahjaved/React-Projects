@@ -3,7 +3,7 @@ import { useContext } from "react";
 import UserContext from "../context/UserContext";
 function Home() {
   const { user } = useContext(UserContext);
-  if (!user.username != null && user.password != null)
+  if (user && user.username && user.password)
     return (
       <div>
         <h1>USER PROFILE</h1>
